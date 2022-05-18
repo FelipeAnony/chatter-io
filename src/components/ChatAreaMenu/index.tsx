@@ -1,8 +1,15 @@
-import * as C from './styles';
+import { useState } from 'react';
 import { BiLeftArrowAlt } from 'react-icons/bi';
+import EmojiPicker from 'emoji-picker-react';
+
+import * as C from './styles';
+
 import MessageBallon from '../MessageBallon';
 import WriteMsgArea from '../WriteMsgArea';
 import ProfilePhoto from '../ProfilePhoto';
+
+import { IEmojiData } from 'emoji-picker-react';
+
 
 type Props = {
   screenWidth: number;
@@ -10,10 +17,24 @@ type Props = {
   setVisibility: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+type HandleEmojiClickType = (
+  e: React.MouseEvent<Element, MouseEvent>,
+  emojiData: IEmojiData
+) => void;
+
 function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
 
+  const [emojiIsOpen, setEmojiIsOpen] = useState(false); //emoji picker visibility
+  const [inputMsg, setInputMsg] = useState(''); // message input state
+
+  const handleEmojiClick:HandleEmojiClickType = (e, emojiData) => setInputMsg(inputMsg + emojiData.emoji); //insert emojis
+
   return (
-    <C.Container isVisible={screenWidth < 830 ? !visibility : true}>
+    <C.Container 
+      isVisible={screenWidth < 830 ? !visibility : true} //controlls chat Area visibility
+      emojiIsVisible={emojiIsOpen} // controls emoji picker visibility
+    >
+      
       <div className='chatInfo'>
         <div 
           className='chatInfo__backButton'
@@ -32,7 +53,19 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
       <div className='messagesContainer'>
           <MessageBallon side='left'/>
       </div>
-      <WriteMsgArea />
+      <div className='emojiArea'>
+        <EmojiPicker 
+          onEmojiClick={handleEmojiClick}
+          disableSearchBar
+          disableSkinTonePicker
+        />
+      </div>
+      <WriteMsgArea 
+        emojiIsOpen={emojiIsOpen}
+        inputMsg={inputMsg}
+        setEmojiIsOpen={setEmojiIsOpen}
+        setInputMsg={setInputMsg}
+      />
     </C.Container>
    );
 }

@@ -2,7 +2,14 @@ import { render, screen } from "@testing-library/react";
 
 import WriteMsgArea from ".";
 
-const renderEl = () => render(<WriteMsgArea />)
+const renderEl = () => render(
+  <WriteMsgArea
+    emojiIsOpen={true}
+    inputMsg={''}
+    setEmojiIsOpen={() => null}
+    setInputMsg={() => null}
+  />
+)
 
 describe('WriteMsgArea component', () => {
 

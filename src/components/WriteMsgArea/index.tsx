@@ -3,16 +3,28 @@ import { AiOutlineSend } from 'react-icons/ai';
 
 import * as C from './styles';
 
-function WriteMsgArea() {
+type Props = {
+  emojiIsOpen: boolean;
+  inputMsg: string;
+  setEmojiIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setInputMsg: React.Dispatch<React.SetStateAction<string>>;
+};
+
+function WriteMsgArea({emojiIsOpen, inputMsg,  setEmojiIsOpen, setInputMsg}: Props) {
   return ( 
     <C.Container>
-        <div className='emojiButton'>
-            <GrEmoji/>
+        <div 
+          className='emojiButton'
+          onClick={() => setEmojiIsOpen(!emojiIsOpen)}
+        >
+          <GrEmoji/>
         </div>
         <input 
           type='text'
           placeholder='Write your message...'
           autoFocus
+          value={inputMsg}
+          onChange={(e) => setInputMsg(e.target.value)}
         />
         <div className='sendButton'>
           <AiOutlineSend />

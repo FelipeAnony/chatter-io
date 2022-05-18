@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import logo from '../../images/logo.png';
 
 import * as C from './styles';
 
@@ -18,7 +19,9 @@ function Main() {
   return ( 
     <C.Container>
       <header>
-        <div className='logo'>Chatter.io</div>
+        <div className='logo'>
+          <img src={logo} alt='chatter.io' />
+        </div>
         <ThemeSwitch />
       </header>
       <div className='innerContainer'>

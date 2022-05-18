@@ -9,6 +9,7 @@ type Props = {
 };
 
 function AllChats({ screenWidth, visibility, setVisibility }: Props) {
+
   return ( 
     <C.Container 
       isVisible={screenWidth < 830 ? visibility : true}

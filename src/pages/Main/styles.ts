@@ -17,7 +17,13 @@ export const Container = styled.div`
   }
 
   .logo {
-    margin-left: 45%;
+    margin-left: calc(100% /2 - 50px);
+    width: 100px;
+    
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 
   .innerContainer{

@@ -16,7 +16,6 @@ export const Container = styled.div<Props>`
   margin-right: 10px;
   flex-shrink: 0;
 
-
   img {
     max-width: 100%;
     max-height: 100%;

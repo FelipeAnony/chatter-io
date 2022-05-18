@@ -12,7 +12,7 @@ export const Container = styled.div<Props>`
   margin: 0 auto;
   width: 100%;
   max-width: 800px;
-  max-height: 1200px;
+  height: calc(100vh - 55px);
 
   @media(min-width: 830px) {
     max-width: 400px;
