@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 type Props = {
   isVisible: boolean;
+  userTheme: string;
 };
 
 export const Container = styled.div<Props>`
   display: ${props => props.isVisible ? 'block': 'none'};
-  background-color: #fff;
+  background-color: ${props => props.userTheme === 'dark' ? '#222' : '#fff'};
   border-radius: 5px;
   padding: 10px;
   margin: 0 auto;
@@ -20,6 +21,7 @@ export const Container = styled.div<Props>`
   }
 
   .title {
+    color: ${props => props.userTheme === 'dark' ? 'white' : '#000'};
     margin-top: 20px;
     margin-bottom: 10px;
   }

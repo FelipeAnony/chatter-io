@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import logo from '../../images/logo.png';
 
 import * as C from './styles';
@@ -6,6 +6,7 @@ import * as C from './styles';
 import ChatAreaMenu from '../../components/ChatAreaMenu';
 import AllChatsMenu from '../../components/AllChatsMenu';
 import ThemeSwitch from '../../components/ThemeSwitch';
+import { mainContext } from '../../contexts/mainContext';
 
 function Main() {
   const [isVisible, setIsVisible] = useState(true);
@@ -15,9 +16,12 @@ function Main() {
     window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
   }, []);
 
+  const {state, dispatch} = useContext(mainContext);
+
+  console.log(state);
   
-  return ( 
-    <C.Container>
+  return (
+    <C.Container userTheme={state.theme}>
       <header>
         <div className='logo'>
           <img src={logo} alt='chatter.io' />

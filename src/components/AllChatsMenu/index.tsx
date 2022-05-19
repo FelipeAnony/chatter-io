@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { mainContext } from '../../contexts/mainContext';
 import SearchBox from '../SearchBox';
 import UserCard from '../UserCard';
 import * as C from './styles';
@@ -9,9 +11,11 @@ type Props = {
 };
 
 function AllChats({ screenWidth, visibility, setVisibility }: Props) {
+  const {state, dispatch} = useContext(mainContext);
 
   return ( 
     <C.Container 
+      userTheme={state.theme}
       isVisible={screenWidth < 830 ? visibility : true}
     >
       <h1 className='title'>Chats</h1>

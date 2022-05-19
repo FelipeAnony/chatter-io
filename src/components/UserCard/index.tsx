@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { mainContext } from '../../contexts/mainContext';
 import ProfilePhoto from '../ProfilePhoto';
 import * as C from './styles';
 
@@ -10,8 +11,11 @@ type Props = {
 };
 
 function UserCard({userName, profileImageLink, lastMessage, setVisibility }: Props) {
+  const {state, dispatch} = useContext(mainContext);
+
   return ( 
     <C.Container 
+      userTheme={state.theme}
       onClick={() => setVisibility(false)}
     >
       <ProfilePhoto imageSrc={profileImageLink}/>

@@ -1,24 +1,28 @@
-import * as C from './styles';
+import { useContext } from 'react';
 import { MdOutlineDarkMode, MdOutlineLightMode } from 'react-icons/md';
-import { useState } from 'react';
+
+import * as C from './styles';
+
+import { mainContext } from '../../contexts/mainContext';
 
 function ThemeSwitch() {
-  const [theme, setTheme] = useState('light');
+
+  const {state, dispatch} = useContext(mainContext);
 
   return ( 
-    <C.Container Theme={theme}>
+    <C.Container Theme={state.theme}>
       <div className='selector'>
         <div className='pointer'></div>
       </div>
       <div 
         className='darkIcon'
-        onClick={() => setTheme('dark')}
+        onClick={() => dispatch({type: 'CHANGE_TO_DARK', payload:{}})}
       >
         <MdOutlineDarkMode />
       </div>
       <div 
         className='lightIcon'
-        onClick={() => setTheme('light')}
+        onClick={() => dispatch({type: 'CHANGE_TO_LIGHT', payload:{}})}
       >
         <MdOutlineLightMode />
       </div>

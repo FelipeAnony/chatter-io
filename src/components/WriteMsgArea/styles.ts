@@ -9,10 +9,12 @@ export const Container = styled.div`
 
 
   input{
+    color: inherit;
     width: 80%;
     margin: 0 10px;
     border: none;
     outline: none;
+    background-color: transparent;
   }
 
   .emojiButton, .sendButton {

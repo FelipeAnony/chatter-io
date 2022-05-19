@@ -1,7 +1,12 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  background-color: #ebebeb;
+type Props = {
+  userTheme: string;
+};
+
+export const Container = styled.div<Props>`
+  background-color: ${props => props.userTheme === 'dark' ? '#000' : '#ebebeb'};
+  color: ${props => props.userTheme === 'dark' ? '#fff' : '#000'};
   display: flex;
   align-items: center;
   width: 100%;
@@ -13,7 +18,7 @@ export const Container = styled.div`
   cursor: pointer;
 
   &:hover{
-    background-color: #dbdbdb;  
+    background-color: ${props => props.userTheme === 'dark' ? '#111' : '#dbdbdb'};  
   }
 
   .userInfo{

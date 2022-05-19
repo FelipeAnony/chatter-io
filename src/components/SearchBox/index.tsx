@@ -1,11 +1,17 @@
+import { useContext } from 'react';
 import { BsSearch } from 'react-icons/bs';
+import { mainContext } from '../../contexts/mainContext';
 
 import * as C from './styles';
 
 
 function SearchBox() {
+  const {state, dispatch} = useContext(mainContext);
+
   return ( 
-    <C.Container>
+    <C.Container 
+      userTheme={state.theme}
+    >
       <button>
         <BsSearch />
       </button>

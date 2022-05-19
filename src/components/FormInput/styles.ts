@@ -15,7 +15,7 @@ export const Container = styled.div<Props>`
     background-color: #ebebeb;
     padding: 1px 5px;
     border-radius: 8px;
-    border: solid thin ${props => props.error ? 'red' : '#999'};
+    border: solid thin ${props => props.error ? 'red' : '#333'};
     font-size: 11px;
   }
 
