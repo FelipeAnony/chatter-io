@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { mainContext } from '../../contexts/mainContext';
+import useMainContext from '../../hooks/useMainContext';
 import ProfilePhoto from '../ProfilePhoto';
 import * as C from './styles';
 
@@ -10,8 +9,8 @@ type Props = {
   setVisibility:  React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function UserCard({userName, profileImageLink, lastMessage, setVisibility }: Props) {
-  const {state, dispatch} = useContext(mainContext);
+function UserCard({userName, profileImageLink, lastMessage, setVisibility}: Props) {
+  const {state, dispatch} = useMainContext();
 
   return ( 
     <C.Container 

@@ -1,10 +1,8 @@
 import * as C from './styles';
 
-type Props = {
-  children: JSX.Element;
-};
+import { ChildrenProp } from '../../types/mainTypes';
 
-function MainCard({children}: Props) {
+function MainCard({ children }: ChildrenProp) {
 
   return ( 
     <C.Container>

@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import { mainContext } from '../../contexts/mainContext';
+import useMainContext from '../../hooks/useMainContext';
 import SearchBox from '../SearchBox';
 import UserCard from '../UserCard';
 import * as C from './styles';
@@ -11,7 +10,7 @@ type Props = {
 };
 
 function AllChats({ screenWidth, visibility, setVisibility }: Props) {
-  const {state, dispatch} = useContext(mainContext);
+  const {state, dispatch} = useMainContext();
 
   return ( 
     <C.Container 

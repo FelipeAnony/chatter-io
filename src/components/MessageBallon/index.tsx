@@ -4,7 +4,7 @@ type Props ={
   side: string;
 }
 
-function MessageBallon({side}: Props) {
+function MessageBallon({ side }: Props) {
   return ( 
     <C.Container
       ballonSide={side} 

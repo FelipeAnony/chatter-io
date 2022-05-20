@@ -1,13 +1,12 @@
-import { useContext } from 'react';
 import { MdOutlineDarkMode, MdOutlineLightMode } from 'react-icons/md';
 
 import * as C from './styles';
 
-import { mainContext } from '../../contexts/mainContext';
+import useMainContext from '../../hooks/useMainContext';
 
 function ThemeSwitch() {
 
-  const {state, dispatch} = useContext(mainContext);
+  const {state, dispatch} = useMainContext();
 
   return ( 
     <C.Container Theme={state.theme}>

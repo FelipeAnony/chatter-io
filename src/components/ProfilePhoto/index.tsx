@@ -7,7 +7,7 @@ type Props = {
   size?: string;
 };
 
-function ProfilePhoto({ imageSrc, size }:Props) {
+function ProfilePhoto({imageSrc, size}:Props) {
   return ( 
     <C.Container size={size}>
       {imageSrc ?

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import logo from '../../images/logo.png';
 
 import * as C from './styles';
@@ -6,7 +6,8 @@ import * as C from './styles';
 import ChatAreaMenu from '../../components/ChatAreaMenu';
 import AllChatsMenu from '../../components/AllChatsMenu';
 import ThemeSwitch from '../../components/ThemeSwitch';
-import { mainContext } from '../../contexts/mainContext';
+
+import useMainContext from '../../hooks/useMainContext';
 
 function Main() {
   const [isVisible, setIsVisible] = useState(true);
@@ -16,7 +17,7 @@ function Main() {
     window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
   }, []);
 
-  const {state, dispatch} = useContext(mainContext);
+  const {state, dispatch} = useMainContext();
 
   console.log(state);
   

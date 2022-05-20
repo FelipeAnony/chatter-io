@@ -1,12 +1,11 @@
-import { useContext } from 'react';
 import { BsSearch } from 'react-icons/bs';
-import { mainContext } from '../../contexts/mainContext';
+import useMainContext from '../../hooks/useMainContext';
 
 import * as C from './styles';
 
 
 function SearchBox() {
-  const {state, dispatch} = useContext(mainContext);
+  const {state, dispatch} = useMainContext();
 
   return ( 
     <C.Container 

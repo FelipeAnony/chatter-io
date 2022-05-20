@@ -1,6 +1,7 @@
 import { createContext } from "react";
+import { useMainReducer } from "../hooks/useMainReducer";
 
-import { InitialStateType, initialStateValue, useMainReducer } from "../reducers/mainReducer";
+import { InitialStateType, initialStateValue} from "../reducers/mainReducer";
 import { ActionType, ChildrenProp } from "../types/mainTypes";
 
 type ContextValueType = {

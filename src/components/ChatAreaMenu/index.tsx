@@ -1,15 +1,14 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { BiLeftArrowAlt } from 'react-icons/bi';
 import EmojiPicker from 'emoji-picker-react';
+import { IEmojiData } from 'emoji-picker-react';
 
 import * as C from './styles';
 
 import MessageBallon from '../MessageBallon';
 import WriteMsgArea from '../WriteMsgArea';
 import ProfilePhoto from '../ProfilePhoto';
-
-import { IEmojiData } from 'emoji-picker-react';
-import { mainContext } from '../../contexts/mainContext';
+import useMainContext from '../../hooks/useMainContext';
 
 
 type Props = {
@@ -27,7 +26,7 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
 
   const [emojiIsOpen, setEmojiIsOpen] = useState(false); //emoji picker visibility
   const [inputMsg, setInputMsg] = useState(''); // message input state
-  const {state, dispatch} = useContext(mainContext);
+  const {state, dispatch} = useMainContext();
     
   const handleEmojiClick:HandleEmojiClickType = (e, emojiData) => setInputMsg(inputMsg + emojiData.emoji); //insert emojis
 
