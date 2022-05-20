@@ -5,11 +5,11 @@ import * as C from './styles';
 
 
 function SearchBox() {
-  const {state, dispatch} = useMainContext();
+  const { theme } = useMainContext();
 
   return ( 
     <C.Container 
-      userTheme={state.theme}
+      userTheme={theme}
     >
       <button>
         <BsSearch />

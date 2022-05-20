@@ -2,7 +2,7 @@ import * as C from './styles';
 
 type Props ={
   side: string;
-}
+};
 
 function MessageBallon({ side }: Props) {
   return ( 
@@ -14,6 +14,6 @@ function MessageBallon({ side }: Props) {
       </p>
     </C.Container>
    );
-}
+};
 
 export default MessageBallon;

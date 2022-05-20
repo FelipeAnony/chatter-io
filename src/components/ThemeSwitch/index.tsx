@@ -6,22 +6,22 @@ import useMainContext from '../../hooks/useMainContext';
 
 function ThemeSwitch() {
 
-  const {state, dispatch} = useMainContext();
+  const {theme, setTheme} = useMainContext();
 
   return ( 
-    <C.Container Theme={state.theme}>
+    <C.Container Theme={theme}>
       <div className='selector'>
         <div className='pointer'></div>
       </div>
       <div 
         className='darkIcon'
-        onClick={() => dispatch({type: 'CHANGE_TO_DARK', payload:{}})}
+        onClick={() => setTheme('dark')}
       >
         <MdOutlineDarkMode />
       </div>
       <div 
         className='lightIcon'
-        onClick={() => dispatch({type: 'CHANGE_TO_LIGHT', payload:{}})}
+        onClick={() => setTheme('light')}
       >
         <MdOutlineLightMode />
       </div>

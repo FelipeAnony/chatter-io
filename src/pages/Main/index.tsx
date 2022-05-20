@@ -8,6 +8,8 @@ import AllChatsMenu from '../../components/AllChatsMenu';
 import ThemeSwitch from '../../components/ThemeSwitch';
 
 import useMainContext from '../../hooks/useMainContext';
+import { logout } from '../../helpers/Api';
+import { Navigate } from 'react-router-dom';
 
 function Main() {
   const [isVisible, setIsVisible] = useState(true);
@@ -17,15 +19,18 @@ function Main() {
     window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
   }, []);
 
-  const {state, dispatch} = useMainContext();
-
-  console.log(state);
+  const {user, theme} = useMainContext();
   
   return (
-    <C.Container userTheme={state.theme}>
+    <>
+    {!user ? <Navigate to={'/login'}/> : 
+    <C.Container userTheme={theme}>
       <header>
         <div className='logo'>
           <img src={logo} alt='chatter.io' />
+        </div>
+        <div className='logout'>
+          <button onClick={() => logout()}>Logout</button>
         </div>
         <ThemeSwitch />
       </header>
@@ -42,6 +47,8 @@ function Main() {
         />
       </div>
     </C.Container>
+    }
+    </>
    );
 }
 

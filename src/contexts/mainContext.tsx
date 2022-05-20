@@ -1,29 +1,39 @@
-import { createContext } from "react";
-import { useMainReducer } from "../hooks/useMainReducer";
+import { onAuthStateChanged } from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
 
-import { InitialStateType, initialStateValue} from "../reducers/mainReducer";
-import { ActionType, ChildrenProp } from "../types/mainTypes";
+import { auth } from "../helpers/Api";
+
+import { ChildrenProp } from "../types/mainTypes";
 
 type ContextValueType = {
-  state: InitialStateType;
-  dispatch: React.Dispatch<ActionType>;
+  user: any;
+  theme: 'light' | 'dark' | string;
+  setTheme: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const contextInitialValue =  {
-  state: initialStateValue,
-  dispatch: () => null
-}
+  user: null,
+  theme: 'light',
+  setTheme: () => null
+};
 
 export const mainContext = createContext<ContextValueType>(contextInitialValue);
 
 function ContextProvider({ children }: ChildrenProp) {
-  const [state, dispatch] = useMainReducer();
+  const [theme, setTheme] = useState('light');
+  const [user, setUser] = useState<any>(null);
 
+  useEffect(() => {
+    onAuthStateChanged(auth, currentUser => {
+      setUser(currentUser);
+    })
+  }, []);
+ 
   return ( 
-    <mainContext.Provider value={{state, dispatch}}>
+    <mainContext.Provider value={{user, theme, setTheme}}>
       { children }
     </mainContext.Provider>
-   );
+  );
 }
 
 export default ContextProvider;

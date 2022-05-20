@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import FormInput from "../../components/FormInput";
 import MainCard from "../../components/MainCard";
 import  logo  from '../../images/logo.png';
@@ -6,6 +8,10 @@ import  logo  from '../../images/logo.png';
 import * as C from './styles';
 
 import validateForm from "../../helpers/validateForm";
+import { signup } from "../../helpers/Api";
+import { ErrorMessage } from "../../components/mainComponents";
+import { firebaseErrorFormat } from "../../helpers/firebaseErrors";
+
 
 function SignUp() {
   const [name, setName] = useState('');
@@ -15,20 +21,31 @@ function SignUp() {
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [signupError, setSignupError] = useState<any>();
 
-  const handleSubmit = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
     const tmpNameError = validateForm.name(name);
     const tmpEmailError = validateForm.email(email);
     const tmpPasswordError = validateForm.password(password, confirmPassword);
   
-    setNameError(() => tmpNameError ? tmpNameError : '');
-    setEmailError(() => tmpEmailError ? tmpEmailError : '');
-    setPasswordError(() => tmpPasswordError ? tmpPasswordError : '');
+    setNameError(tmpNameError || '');
+    setEmailError(tmpEmailError || '');
+    setPasswordError(tmpPasswordError || '');
 
     if(tmpNameError || tmpEmailError || tmpPasswordError) {
       return;
-    }
 
+    } else {
+      try {
+        await signup(email, password);
+        navigate('/')
+        
+      } catch (error) {
+        setSignupError(firebaseErrorFormat(error));
+      }
+    }
   };
 
   return ( 
@@ -37,6 +54,7 @@ function SignUp() {
       <MainCard>
         <>
         <h1>Sign Up</h1>
+        {signupError && <ErrorMessage>{signupError}</ErrorMessage>}
         <FormInput 
           title="Name"
           inputType="text"

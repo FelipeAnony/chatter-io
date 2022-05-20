@@ -1,7 +1,9 @@
-import useMainContext from '../../hooks/useMainContext';
-import SearchBox from '../SearchBox';
-import UserCard from '../UserCard';
 import * as C from './styles';
+
+import UserCard from '../UserCard';
+import SearchBox from '../SearchBox';
+
+import useMainContext from '../../hooks/useMainContext';
 
 type Props = {
   screenWidth: number;
@@ -10,11 +12,11 @@ type Props = {
 };
 
 function AllChats({ screenWidth, visibility, setVisibility }: Props) {
-  const {state, dispatch} = useMainContext();
+  const { theme } = useMainContext();
 
   return ( 
     <C.Container 
-      userTheme={state.theme}
+      userTheme={theme}
       isVisible={screenWidth < 830 ? visibility : true}
     >
       <h1 className='title'>Chats</h1>
@@ -23,7 +25,7 @@ function AllChats({ screenWidth, visibility, setVisibility }: Props) {
         setVisibility={setVisibility}
         userName='Testing'
         profileImageLink=''
-        lastMessage='hiiiiiiiii iiiiiiiiciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiisddaaaa'
+        lastMessage='iiiiiiiiiiaaa'
       />
     </C.Container>
   );

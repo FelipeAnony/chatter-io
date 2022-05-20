@@ -8,6 +8,7 @@ import * as C from './styles';
 import MessageBallon from '../MessageBallon';
 import WriteMsgArea from '../WriteMsgArea';
 import ProfilePhoto from '../ProfilePhoto';
+
 import useMainContext from '../../hooks/useMainContext';
 
 
@@ -26,13 +27,13 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
 
   const [emojiIsOpen, setEmojiIsOpen] = useState(false); //emoji picker visibility
   const [inputMsg, setInputMsg] = useState(''); // message input state
-  const {state, dispatch} = useMainContext();
+  const { theme } = useMainContext();
     
   const handleEmojiClick:HandleEmojiClickType = (e, emojiData) => setInputMsg(inputMsg + emojiData.emoji); //insert emojis
 
   return (
     <C.Container 
-      userTheme={state.theme}
+      userTheme={theme}
       isVisible={screenWidth < 830 ? !visibility : true} //controlls chat Area visibility
       emojiIsVisible={emojiIsOpen} // controls emoji picker visibility
     >

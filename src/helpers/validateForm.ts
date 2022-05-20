@@ -23,13 +23,13 @@ const validateForm = {
   },
 
   password: (password: string, confirmPassword: string) => {
-    const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
+    const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
 
     if(!password.trim()) {
       return 'the password field cannot be empty.';
     }
     if (!regexPassword.test(password.trim())){
-      return "the password must contain at least 4 characters, at least one letter and one number"
+      return "the password must contain at least 6 characters, at least one letter and one number"
     } 
     if(password !== confirmPassword) {
       return 'passwords do not match.';
