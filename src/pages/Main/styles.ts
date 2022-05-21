@@ -22,7 +22,7 @@ export const Container = styled.div<Props>`
   }
 
   .logo {
-    margin-left: calc(100% /2 - 50px);
+    margin-left: 30px;
     width: 100px;
     
     img {
@@ -36,5 +36,9 @@ export const Container = styled.div<Props>`
     display: flex;
     justify-content: center;
     width: 100%;
+  }
+
+  .logout {
+    margin-right: 30px;
   }
 `

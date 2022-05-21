@@ -7,10 +7,11 @@ import  logo  from '../../images/logo.png'
 import FormInput from '../../components/FormInput';
 
 import * as C from './styles';
-import { ErrorMessage } from '../../components/mainComponents';
+import { ErrorMessage, Template } from '../../components/mainComponents';
 import validateForm from '../../helpers/validateForm';
 import { firebaseErrorFormat } from '../../helpers/firebaseErrors';
 import { login, loginWithGoogle } from '../../helpers/Api';
+import MainButton from '../../components/MainButton';
 
 function Login() {
   const [userEmail, setUserEmail] = useState('');
@@ -49,52 +50,57 @@ function Login() {
 
   return ( 
     <C.Container>
-      <MainCard>
-        <>
-        <div className='logo'>
-          <img src={logo} alt='chatter.io' />
-        </div>
-        <h3>Login</h3>
-        {loginErrorMsg && <ErrorMessage>{loginErrorMsg}</ErrorMessage>}
-        <FormInput 
-          inputType='email'
-          title='Email'
-          inputPlaceholder='example@example.com'
-          error={emailError}
-          state={userEmail}
-          setState={setUserEmail}
-        />
-        <FormInput 
-          inputType='password'
-          title='Password'
-          error=''
-          state={userPassword}
-          setState={setUserPassword}
-        />
-        <button onClick={handleSubmit}>
-          Login
-        </button>
-        <hr/>
-        <div
-          className='googleLoginBtn' 
-          onClick={handleGoogleLogin}
-        >
-          <FcGoogle className='googleLogo'/>
-          Login With Google 
-        </div>
-        <a
-          href='/forgotpassword' 
-          target='_blank' 
-          className='forgotPass'
-        >
-          Forgot your password?
-        </a> 
-        </>
-      </MainCard>
-      <div className='linkToSignUp'>
-          Doesn't have an account yet? 
-          <Link to='/signup'> Sign up now!</Link>
-      </div> 
+      <Template>
+        <MainCard>
+          <>
+          <div className='logo'>
+            <img src={logo} alt='chatter.io' />
+          </div>
+          <h3>Login</h3>
+          {loginErrorMsg && <ErrorMessage>{loginErrorMsg}</ErrorMessage>}
+          <FormInput 
+            inputType='email'
+            title='Email'
+            inputPlaceholder='example@example.com'
+            error={emailError}
+            state={userEmail}
+            setState={setUserEmail}
+          />
+          <FormInput 
+            inputType='password'
+            title='Password'
+            error=''
+            state={userPassword}
+            setState={setUserPassword}
+          />
+          <MainButton 
+            onClickFn={handleSubmit}
+            title='Login'
+            color='#6800B9'
+            size='80%'
+          />
+          <hr/>
+          <div
+            className='googleLoginBtn' 
+            onClick={handleGoogleLogin}
+          >
+            <FcGoogle className='googleLogo'/>
+            Login With Google 
+          </div>
+          <a
+            href='/forgotpassword' 
+            target='_blank' 
+            className='forgotPass'
+          >
+            Forgot your password?
+          </a> 
+          </>
+        </MainCard>
+        <div className='linkToSignUp'>
+            Doesn't have an account yet? 
+            <Link to='/signup'> Sign up now!</Link>
+        </div> 
+      </Template>
     </C.Container>
    );
 }

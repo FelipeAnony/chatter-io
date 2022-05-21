@@ -9,8 +9,9 @@ import * as C from './styles';
 
 import validateForm from "../../helpers/validateForm";
 import { signup } from "../../helpers/Api";
-import { ErrorMessage } from "../../components/mainComponents";
+import { ErrorMessage, Template } from "../../components/mainComponents";
 import { firebaseErrorFormat } from "../../helpers/firebaseErrors";
+import MainButton from "../../components/MainButton";
 
 
 function SignUp() {
@@ -21,7 +22,7 @@ function SignUp() {
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [signupError, setSignupError] = useState<any>();
+  const [signupError, setSignupError] = useState<any>('');
 
   const navigate = useNavigate();
 
@@ -50,46 +51,53 @@ function SignUp() {
 
   return ( 
     <C.Container>
-      <MainCard>
-        <>
-        <div className="logo">
-          <img src={logo} alt='chatter.io' />
-        </div>
-        <h3>Sign Up</h3>
-        {signupError && <ErrorMessage>{signupError}</ErrorMessage>}
-        <FormInput 
-          title="Name"
-          inputType="text"
-          inputPlaceholder="Elon Musk"
-          state={name}
-          setState={setName}
-          error={nameError}
-        />
-        <FormInput 
-          title="Email"
-          inputType="email"
-          inputPlaceholder="example@example.com"
-          state={email}
-          setState={setEmail}
-          error={emailError}
-        />
-        <FormInput 
-          title="Password"
-          inputType="password"
-          state={password}
-          setState={setPassword}
-          error={passwordError}
-        />
-        <FormInput 
-          title="Confirm Password"
-          inputType="password"
-          state={confirmPassword}
-          setState={setConfirmPassword}
-          error={passwordError}
-        />
-        <button onClick={handleSubmit}>Sign up now</button>
+      <Template>
+        <MainCard>
+          <>
+          <div className="logo">
+            <img src={logo} alt='chatter.io' />
+          </div>
+          <h3>Sign Up</h3>
+          {signupError && <ErrorMessage>{signupError}</ErrorMessage>}
+          <FormInput 
+            title="Name"
+            inputType="text"
+            inputPlaceholder="Elon Musk"
+            state={name}
+            setState={setName}
+            error={nameError}
+          />
+          <FormInput 
+            title="Email"
+            inputType="email"
+            inputPlaceholder="example@example.com"
+            state={email}
+            setState={setEmail}
+            error={emailError}
+          />
+          <FormInput 
+            title="Password"
+            inputType="password"
+            state={password}
+            setState={setPassword}
+            error={passwordError}
+          />
+          <FormInput 
+            title="Confirm Password"
+            inputType="password"
+            state={confirmPassword}
+            setState={setConfirmPassword}
+            error={passwordError}
+          />
+          <MainButton
+            onClickFn={handleSubmit}
+            title='Sign up now'
+            color='#6800B9'
+            size='80%'
+          />
         </>
-      </MainCard>
+        </MainCard>
+      </Template>
     </C.Container>
    );
 }

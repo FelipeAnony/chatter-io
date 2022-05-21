@@ -10,6 +10,7 @@ import ThemeSwitch from '../../components/ThemeSwitch';
 import useMainContext from '../../hooks/useMainContext';
 import { logout } from '../../helpers/Api';
 import { Navigate } from 'react-router-dom';
+import MainButton from '../../components/MainButton';
 
 function Main() {
   const [isVisible, setIsVisible] = useState(true);
@@ -29,10 +30,15 @@ function Main() {
         <div className='logo'>
           <img src={logo} alt='chatter.io' />
         </div>
-        <div className='logout'>
-          <button onClick={() => logout()}>Logout</button>
-        </div>
         <ThemeSwitch />
+        <div className='logout'>
+          <MainButton 
+            onClickFn={() => logout()} 
+            title='Logout'
+            color='#6800B9'
+            size='60px'
+          />
+        </div>
       </header>
       <div className='innerContainer'>
         <AllChatsMenu 

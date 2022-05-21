@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from 'firebase/auth';
 
 import firebaseConfig from './firebaseConfig';
 
@@ -22,3 +22,7 @@ export const loginWithGoogle = async () => {
   const googleProvider = new GoogleAuthProvider()
   await signInWithPopup(auth, googleProvider)
 };
+
+export const resetPassword = (email: string) => (
+  sendPasswordResetEmail(auth, email)
+);

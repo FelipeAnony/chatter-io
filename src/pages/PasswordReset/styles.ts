@@ -25,18 +25,4 @@ export const Container = styled.div`
     color: #555;
   }
 
-  button {
-    margin: 20px 0;
-    border-radius: 5px;
-    border: solid thin transparent;
-    padding: 5px 10px;
-    background-color: #6800B9;
-    color: white;
-    cursor: pointer;
-
-    &:hover {
-      opacity: .9;
-    }
-  }
-
 `
