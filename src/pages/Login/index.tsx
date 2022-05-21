@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
+import { FcGoogle } from 'react-icons/fc';
 
 import MainCard from '../../components/MainCard';
 import  logo  from '../../images/logo.png'
@@ -48,10 +49,12 @@ function Login() {
 
   return ( 
     <C.Container>
-      <img src={logo} alt='chatter.io' />
       <MainCard>
         <>
-        <h1>Login</h1>
+        <div className='logo'>
+          <img src={logo} alt='chatter.io' />
+        </div>
+        <h3>Login</h3>
         {loginErrorMsg && <ErrorMessage>{loginErrorMsg}</ErrorMessage>}
         <FormInput 
           inputType='email'
@@ -71,22 +74,27 @@ function Login() {
         <button onClick={handleSubmit}>
           Login
         </button>
-        <button onClick={handleGoogleLogin}>
-          Login With Google
-        </button>
+        <hr/>
+        <div
+          className='googleLoginBtn' 
+          onClick={handleGoogleLogin}
+        >
+          <FcGoogle className='googleLogo'/>
+          Login With Google 
+        </div>
         <a
           href='/forgotpassword' 
           target='_blank' 
           className='forgotPass'
         >
           Forgot your password?
-        </a>
-        <div>
-          Doesn't have an account yet? 
-          <Link to='/signup'> Sign up now!</Link>
-        </div>  
+        </a> 
         </>
       </MainCard>
+      <div className='linkToSignUp'>
+          Doesn't have an account yet? 
+          <Link to='/signup'> Sign up now!</Link>
+      </div> 
     </C.Container>
    );
 }

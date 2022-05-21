@@ -19,61 +19,24 @@ export const Container = styled.div`
       height: auto;
     }
   }
-
+  
   h3 {
-    color: #777;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    color: #555;
   }
 
-  hr {
-    margin-top: 20px;
-    height: 1px;
-    width: 90%;
-  }
-
-  button, .googleLoginBtn {
-    width: 80%;
-    padding: 5px 10px;
-    margin-top: 10px;
-    color: white;
-    background-color: #6800B9;
-    border: solid thin grey;
+  button {
+    margin: 20px 0;
     border-radius: 5px;
+    border: solid thin transparent;
+    padding: 5px 10px;
+    background-color: #6800B9;
+    color: white;
     cursor: pointer;
-    font-size: 13px;
 
-    &:hover{
+    &:hover {
       opacity: .9;
     }
-  }
-
-  .googleLoginBtn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    background-color: slategrey;
-  
-  }
-
-  a {
-    margin: 10px 0;
-    color: black;
-
-    &:hover{
-      color: #6800B9;
-    }
-  }
-
-  .googleLogo {
-    font-size: 22px;
-    margin-right: 10px;
-    background-color: white;
-    padding: 1px;
-  }
-
-  .linkToSignUp{
-    margin: 10px 0;
   }
 
 `

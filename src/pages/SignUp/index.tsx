@@ -50,10 +50,12 @@ function SignUp() {
 
   return ( 
     <C.Container>
-      <img src={logo} alt='chatter.io' />
       <MainCard>
         <>
-        <h1>Sign Up</h1>
+        <div className="logo">
+          <img src={logo} alt='chatter.io' />
+        </div>
+        <h3>Sign Up</h3>
         {signupError && <ErrorMessage>{signupError}</ErrorMessage>}
         <FormInput 
           title="Name"

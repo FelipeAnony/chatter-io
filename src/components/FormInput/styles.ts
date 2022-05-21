@@ -9,13 +9,13 @@ export const Container = styled.div<Props>`
   margin: 5px 0;
 
   .innerContainer {
-    color: ${props => props.error ? 'red' : '#333'};
+    color: ${props => props.error ? 'red' : '#6800B9'};
     display: flex;
     flex-direction: column;
     background-color: #ebebeb;
     padding: 1px 5px;
     border-radius: 8px;
-    border: solid thin ${props => props.error ? 'red' : '#333'};
+    border: solid thin ${props => props.error ? 'red' : '#6800B9'};
     font-size: 11px;
   }
 
