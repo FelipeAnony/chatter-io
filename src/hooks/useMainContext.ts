@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { mainContext } from "../contexts/mainContext";
 
 function useMainContext() {
-  const {user, theme, setTheme} = useContext(mainContext);
-  return {user, theme, setTheme};
+  const {user, userAuth, theme, setTheme, setUser} = useContext(mainContext);
+  return {user,userAuth, theme, setTheme, setUser};
 }
 
 export default useMainContext;

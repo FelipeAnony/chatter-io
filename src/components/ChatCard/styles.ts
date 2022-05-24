@@ -37,4 +37,11 @@ export const Container = styled.div<Props>`
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  .userInfo__date {
+    margin-top: 10px;
+    font-size: 10px;
+    opacity: .6;
+  }
+
 `

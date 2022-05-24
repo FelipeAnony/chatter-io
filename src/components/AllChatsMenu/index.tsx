@@ -1,9 +1,13 @@
+import { useEffect, useState } from 'react';
+
 import * as C from './styles';
 
-import UserCard from '../UserCard';
+import ChatCard from '../ChatCard';
 import SearchBox from '../SearchBox';
 
 import useMainContext from '../../hooks/useMainContext';
+import { UserDataType } from '../../types/mainTypes';
+import { getOrCreateDocumentOnDb } from '../../helpers/Api';
 
 type Props = {
   screenWidth: number;
@@ -12,6 +16,7 @@ type Props = {
 };
 
 function AllChats({ screenWidth, visibility, setVisibility }: Props) {
+  const [chatList, setChatList] = useState<UserDataType | any>(null);
   const { theme } = useMainContext();
 
   return ( 
@@ -21,12 +26,17 @@ function AllChats({ screenWidth, visibility, setVisibility }: Props) {
     >
       <h1 className='title'>Chats</h1>
       <SearchBox />
-      <UserCard 
-        setVisibility={setVisibility}
-        userName='Testing'
-        profileImageLink=''
-        lastMessage='iiiiiiiiiiaaa'
-      />
+      {/* {chatList.data[0].chats.length > 0 && 
+        chatList.data[0].chats.map((e:any) => (
+          <ChatCard 
+            key={e.title}
+            setVisibility={setVisibility}
+            chatTitle={e.title}
+            profileImageLink={e.image}
+            lastMessage={e.lastMessage}
+            date={e.lastMessageDate.seconds}
+          />
+      ))} */}
     </C.Container>
   );
 }

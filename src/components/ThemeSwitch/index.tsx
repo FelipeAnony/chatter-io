@@ -15,12 +15,14 @@ function ThemeSwitch() {
       </div>
       <div 
         className='darkIcon'
+        data-testid='dark'
         onClick={() => setTheme('dark')}
       >
         <MdOutlineDarkMode />
       </div>
       <div 
         className='lightIcon'
+        data-testid='light'
         onClick={() => setTheme('light')}
       >
         <MdOutlineLightMode />

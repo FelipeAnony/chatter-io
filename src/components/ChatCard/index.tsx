@@ -3,15 +3,17 @@ import * as C from './styles';
 import ProfilePhoto from '../ProfilePhoto';
 
 import useMainContext from '../../hooks/useMainContext';
+import { formatDateByTimestamp } from '../../helpers/dateFormater';
 
 type Props = {
-  userName: string;
+  chatTitle: string;
   profileImageLink: string;
   lastMessage: string;
+  date: string;
   setVisibility:  React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function UserCard({userName, profileImageLink, lastMessage, setVisibility}: Props) {
+function ChatCard({chatTitle, profileImageLink, lastMessage, date, setVisibility}: Props) {
   const { theme } = useMainContext();
 
   return ( 
@@ -21,11 +23,12 @@ function UserCard({userName, profileImageLink, lastMessage, setVisibility}: Prop
     >
       <ProfilePhoto imageSrc={profileImageLink}/>
       <div className='userInfo'>
-        <div className='userInfo__name'>{userName}</div>
+        <div className='userInfo__name'>{chatTitle}</div>
         <div className='userInfo__lastMessage'>{lastMessage}</div>
+        <div className='userInfo__date'>{formatDateByTimestamp(date)}</div>
       </div> 
     </C.Container>
    );
 }
 
-export default UserCard;
+export default ChatCard;

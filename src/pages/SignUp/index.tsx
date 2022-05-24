@@ -12,7 +12,7 @@ import { signup } from "../../helpers/Api";
 import { ErrorMessage, Template } from "../../components/mainComponents";
 import { firebaseErrorFormat } from "../../helpers/firebaseErrors";
 import MainButton from "../../components/MainButton";
-
+import useMainContext from "../../hooks/useMainContext";
 
 function SignUp() {
   const [name, setName] = useState('');
@@ -25,6 +25,7 @@ function SignUp() {
   const [signupError, setSignupError] = useState<any>('');
 
   const navigate = useNavigate();
+  const { setUser } = useMainContext();
 
   const handleSubmit = async () => {
     const tmpNameError = validateForm.name(name);
@@ -41,8 +42,8 @@ function SignUp() {
     } else {
       try {
         await signup(email, password);
+        setUser({name, email})
         navigate('/')
-        
       } catch (error) {
         setSignupError(firebaseErrorFormat(error));
       }

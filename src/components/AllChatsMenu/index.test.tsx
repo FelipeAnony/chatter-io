@@ -7,25 +7,15 @@ const renderEl = () => render(
     screenWidth={830}
     setVisibility={() => null}
     visibility={true}
+    
   />
 );
 
 describe('AllChatsMenu component', () => {
-  it('Should render', () => {
+  it('Should render appropiately', () => {
     renderEl();
-    
-  });
-
-  it('Should have a title', ()=>{
-    renderEl();
-    const element = screen.getByText('Chats');
-    expect(element).toBeInTheDocument();
-  });
-
-  it('Should have an input', ()=>{
-    renderEl();
-    const element = screen.getByRole('textbox');
-    expect(element).toBeInTheDocument();
+    expect(screen.getByText('Chats')).toBeInTheDocument();
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
   });
 
 });
