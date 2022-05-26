@@ -8,9 +8,10 @@ type Props = {
   inputMsg: string;
   setEmojiIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setInputMsg: React.Dispatch<React.SetStateAction<string>>;
+  handlerClick: () => any;
 };
 
-function WriteMsgArea({emojiIsOpen, inputMsg,  setEmojiIsOpen, setInputMsg}: Props) {
+function WriteMsgArea({emojiIsOpen, inputMsg,  setEmojiIsOpen, setInputMsg, handlerClick}: Props) {
   return ( 
     <C.Container>
         <div 
@@ -26,7 +27,10 @@ function WriteMsgArea({emojiIsOpen, inputMsg,  setEmojiIsOpen, setInputMsg}: Pro
           value={inputMsg}
           onChange={(e) => setInputMsg(e.target.value)}
         />
-        <div className='sendButton'>
+        <div 
+          className='sendButton'
+          onClick={handlerClick}
+        >
           <AiOutlineSend />
         </div>
     </C.Container>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { BiLeftArrowAlt } from 'react-icons/bi';
 import EmojiPicker from 'emoji-picker-react';
 import { IEmojiData } from 'emoji-picker-react';
@@ -10,7 +10,9 @@ import WriteMsgArea from '../WriteMsgArea';
 import ProfilePhoto from '../ProfilePhoto';
 
 import useMainContext from '../../hooks/useMainContext';
-
+import { db, sendMessage } from '../../helpers/Api';
+import { ChatDataType } from '../../types/mainTypes';
+import { collection,  onSnapshot } from 'firebase/firestore';
 
 type Props = {
   screenWidth: number;
@@ -27,9 +29,58 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
 
   const [emojiIsOpen, setEmojiIsOpen] = useState(false); //emoji picker visibility
   const [inputMsg, setInputMsg] = useState(''); // message input state
-  const { theme } = useMainContext();
-    
+  const [currentChatData, setCurrentChatData] = useState<ChatDataType | any>(null);
+  const { userAuth, theme, currentChat } = useMainContext();
+
+  const divRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, `chats`, `${currentChat}`), (doc) => {
+      let data: any = [];
+
+      doc.forEach((doc) => {
+        data.push(doc.data());
+      });
+      setCurrentChatData(data);
+
+    }); 
+     
+
+    return () => {
+      setCurrentChatData(null)
+      unsub();
+    }
+
+  }, []);
+
+  useEffect(() => {
+    if(divRef.current) {
+      divRef.current.scrollTop = divRef.current?.scrollHeight;
+    } 
+  }, [currentChatData])
+
   const handleEmojiClick:HandleEmojiClickType = (e, emojiData) => setInputMsg(inputMsg + emojiData.emoji); //insert emojis
+
+  const handleSendMessage = async () => {
+    if(!inputMsg) {
+      return;
+    }
+
+    const message = {
+      author: userAuth.email,
+      body: inputMsg,
+      date:+ new Date() / 1000,
+    };
+
+    currentChat && await sendMessage(currentChat, message);
+
+    setInputMsg('')
+
+    if(divRef.current) {
+      divRef.current.scrollTop = divRef.current?.scrollHeight;
+    }  
+
+  };
 
   return (
     <C.Container 
@@ -46,16 +97,26 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
           <BiLeftArrowAlt />
         </div>
         <ProfilePhoto 
-          imageSrc=''
-          size='small'  
+          imageSrc={currentChatData ? currentChatData[0].chatAvatar : ''}
+          size='small'
         />
         <div className='chatInfo__chatTitle'>
-          Testing...
+          {currentChatData ? currentChatData[0].title : 'Loading...'}
         </div>
       </div>
-      <div className='messagesContainer'>
-          <MessageBallon side='left'/>
-          <MessageBallon side='right'/>
+      <div 
+        className='messagesContainer'
+        ref={divRef}
+      >
+          {currentChatData && currentChatData[0].messages.length > 0 &&
+            currentChatData[0].messages.map((e: any, key:any) => (
+                <MessageBallon 
+                  message={e.body}
+                  key={key}
+                  side={e.author === userAuth.email ? 'right' : 'left'}
+                />
+            ))
+          }
       </div>
       <div className='emojiArea'>
         <EmojiPicker 
@@ -69,6 +130,7 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
         inputMsg={inputMsg}
         setEmojiIsOpen={setEmojiIsOpen}
         setInputMsg={setInputMsg}
+        handlerClick={handleSendMessage}
       />
     </C.Container>
    );

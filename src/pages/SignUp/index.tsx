@@ -24,8 +24,10 @@ function SignUp() {
   const [passwordError, setPasswordError] = useState('');
   const [signupError, setSignupError] = useState<any>('');
 
+  const { setTmpUserData } = useMainContext();
+  
   const navigate = useNavigate();
-  const { setUser } = useMainContext();
+
 
   const handleSubmit = async () => {
     const tmpNameError = validateForm.name(name);
@@ -42,7 +44,7 @@ function SignUp() {
     } else {
       try {
         await signup(email, password);
-        setUser({name, email})
+        setTmpUserData(name)
         navigate('/')
       } catch (error) {
         setSignupError(firebaseErrorFormat(error));

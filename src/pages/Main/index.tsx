@@ -8,38 +8,40 @@ import AllChatsMenu from '../../components/AllChatsMenu';
 import ThemeSwitch from '../../components/ThemeSwitch';
 
 import useMainContext from '../../hooks/useMainContext';
-import { getOrCreateDocumentOnDb, logout } from '../../helpers/Api';
+import { getDataFromDb, getOrCreateDocumentOnDb, getUserDataFromDbFake, logout } from '../../helpers/Api';
 import MainButton from '../../components/MainButton';
 
 function Main() {
   const [isVisible, setIsVisible] = useState(true);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const { userAuth, user, setUser } = useMainContext();
+  const { theme, userAuth, tmpUserData, setUserData } = useMainContext();
 
   useEffect(() => {
     window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
   }, []);
 
   useEffect(() => {
-    console.log(user)
-    const initialData = { ...user, 
-      name: userAuth.displayName || user.name,
-      email: userAuth.email,
-      profileImage: userAuth.photoURL,
-      chats: []
-    } 
+    //buscar info do usuario conectado atraves do email disponivel
+    //en userAuth e setar userData com essa info
 
     const getUserData = async () => {
-      const userData = await getOrCreateDocumentOnDb('users', userAuth.email, initialData);
-      setUser(userData);
-    }
+      //pegar info na db relacionadas ao user atual
+      const initialUserData = {
+        name: tmpUserData || '',
+        email: userAuth.email,
+        userAvatar: '',
+        chats: []
+      };
+
+      const tmpData = await getOrCreateDocumentOnDb('users', userAuth.email, initialUserData)
+      setUserData(tmpData);
+
+    };
 
     getUserData();
 
   }, []);
 
-  const { theme } = useMainContext();
-  
   return (
     <>
       <C.Container userTheme={theme}>

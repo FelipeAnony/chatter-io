@@ -3,15 +3,23 @@ export type ChildrenProp = {
 };
 
 export type UserDataType = {
-  id: string;
   name: string;
+  email: string;
   chats: {
-    lastMessage: string;
-    lastMessageDate: {seconds: string};
     chatId: string;
-    title: string; 
-    image: string;
   }[];
-  profileImage: string;
-  
+  userAvatar: string;
+};
+
+export type ChatDataType = {
+  messages:
+  {
+    author: string;
+    body: string;
+    date: number;
+  }[];
+  title: string;
+  chatAvatar: string;
+  lastMessage: string;
+  lastMessageDate: number;
 };
