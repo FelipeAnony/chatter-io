@@ -27,9 +27,7 @@ function ChatCard({ chatId, setVisibility }: Props) {
     return () => {
       unsub();
     }
-
   }, []);
-  
 
   const handleClick = () => {
     setVisibility(false);

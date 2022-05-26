@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import * as C from './styles';
 
 import ChatCard from '../ChatCard';

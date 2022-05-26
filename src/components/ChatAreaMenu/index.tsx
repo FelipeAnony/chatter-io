@@ -27,8 +27,8 @@ type HandleEmojiClickType = (
 
 function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
 
-  const [emojiIsOpen, setEmojiIsOpen] = useState(false); //emoji picker visibility
-  const [inputMsg, setInputMsg] = useState(''); // message input state
+  const [emojiIsOpen, setEmojiIsOpen] = useState(false);
+  const [inputMsg, setInputMsg] = useState('');
   const [currentChatData, setCurrentChatData] = useState<ChatDataType | any>(null);
   const { userAuth, theme, currentChat } = useMainContext();
 
@@ -45,7 +45,6 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
 
     }); 
      
-
     return () => {
       setCurrentChatData(null)
       unsub();
@@ -79,7 +78,6 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
     if(divRef.current) {
       divRef.current.scrollTop = divRef.current?.scrollHeight;
     }  
-
   };
 
   return (

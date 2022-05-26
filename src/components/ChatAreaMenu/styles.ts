@@ -62,7 +62,7 @@ export const Container = styled.div<Props>`
   .messagesContainer {
     border-bottom:  solid thin ${props => props.userTheme === 'dark' ? '#444' : '#ebebeb'};
     height: ${ props => props.emojiIsVisible ?  'calc(100% - 280px)' : 'calc(100% - 80px)'};
-    max-height: calc(100vh - 160px);
+    max-height: calc(100vh - 170px);
     overflow-y: scroll;
     background-image: var(${props => props.userTheme === 'dark' ? '--bg-dark' : '--bg-light'});
     padding: 0 5px;

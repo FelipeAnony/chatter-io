@@ -4,13 +4,8 @@ import {
   collection,
   doc,
   getDocs,
-  addDoc,
-  query,
-  where,
-  Firestore,
   getDoc,
   setDoc,
-  onSnapshot,
   updateDoc,
   arrayUnion,
   serverTimestamp,
@@ -27,7 +22,6 @@ import {
 } from "firebase/auth";
 
 import firebaseConfig from './firebaseConfig';
-import { ChatDataType } from '../types/mainTypes';
 
 const firebaseApp = initializeApp(firebaseConfig);
 export const db = getFirestore(firebaseApp);
@@ -63,13 +57,6 @@ export const getDataFromDb = async (collectionName: string ) => {
   return data;
 };
 
-
-
-
-
-
-
-
 export const getOrCreateDocumentOnDb = async (docName: string, docId: string, dataToCreate?: any) => {
   const docRef = doc(db, `${docName}/${docId}`);
   const consult = await getDoc(docRef);
@@ -102,82 +89,4 @@ export const sendMessage = async (docId: string, data: any) => {
     lastMessageDate: serverTimestamp(),
     messages: arrayUnion(data)
   });
-};
-
-export const getUserDataFromDb = (userEmail: string) => {
-  //get dados na db usando o userEmail:
-  const userData = {
-    name: 'felipe',
-    email: 'felipemom2001@gmail.com',
-    userAvatar: '',
-    chats: [
-      {chatId: 'abcdefg1234567'},
-      {chatId: '123456789'}
-    ]
-  };
-
-}
-//Fake Api: 
-
-export const getUserDataFromDbFake = (userEmail: string) => {
-  //get dados na db usando o userEmail:
-  const userData = {
-    name: 'felipe',
-    email: 'felipemom2001@gmail.com',
-    userAvatar: '',
-    chats: [
-      {chatId: 'abcdefg1234567'},
-      {chatId: '123456789'}
-    ]
-  };
-
-  //caso nao existir data do usuario (login via signup) criar uma
-
-  return userData;
-}
-
-export const getChatDataFromDbFake = (chatId: string) => {
-  //pega dados no db de acordo com o chatId passado por parametro
-
-  if(chatId === 'abcdefg1234567') {
-    const chatData = {
-      messages: [
-        {
-          author: 'felipemom001@gmail.com',
-          body: 'eai',
-          date: + new Date() / 1000
-        },
-        {
-          author: 'suporte@gmail.com',
-          body: 'hi',
-          date: + new Date() / 1000
-        }
-      ],
-      title: 'Pedro',
-      chatAvatar: '',
-      lastMessage: 'hi',
-      lastMessageDate: + new Date()
-    };
-    return chatData;
-  } else {
-    const chatData = {
-      messages: [
-        {
-          author: 'felipemom001@gmail.com',
-          body: 'ohayougozaimasu',
-          date: + new Date() / 1000
-        },
-        {
-          author: 'felipemom001@gmail.com',
-          body: 'ohayou',
-          date: + new Date() / 1000
-        }
-      ],
-      title: 'Pedro p',
-      chatAvatar: '',
-      lastMessage: 'hi',
-      lastMessageDate: + new Date()
-    };
-    return chatData;
-  }
 };

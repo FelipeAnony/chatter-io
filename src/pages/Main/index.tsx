@@ -8,7 +8,7 @@ import AllChatsMenu from '../../components/AllChatsMenu';
 import ThemeSwitch from '../../components/ThemeSwitch';
 
 import useMainContext from '../../hooks/useMainContext';
-import { getDataFromDb, getOrCreateDocumentOnDb, getUserDataFromDbFake, logout } from '../../helpers/Api';
+import { getOrCreateDocumentOnDb, logout } from '../../helpers/Api';
 import MainButton from '../../components/MainButton';
 
 function Main() {
@@ -21,11 +21,8 @@ function Main() {
   }, []);
 
   useEffect(() => {
-    //buscar info do usuario conectado atraves do email disponivel
-    //en userAuth e setar userData com essa info
 
     const getUserData = async () => {
-      //pegar info na db relacionadas ao user atual
       const initialUserData = {
         name: tmpUserData || '',
         email: userAuth.email,
