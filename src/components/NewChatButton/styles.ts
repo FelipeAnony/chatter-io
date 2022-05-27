@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  position: fixed;
-  top: 88%;
-  left: calc(100% - 80px);
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -15,10 +15,6 @@ export const Container = styled.div`
   color: white;
   font-size: 27px;
   padding-top: 5px;
-
-  @media(min-width: 830px){
-    left: 340px;
-  }
   
   &:hover{
     opacity: .9;

@@ -24,7 +24,7 @@ function Main() {
 
     const getUserData = async () => {
       const initialUserData = {
-        name: tmpUserData || '',
+        name: tmpUserData || userAuth.displayName || '',
         email: userAuth.email,
         userAvatar: '',
         chats: []

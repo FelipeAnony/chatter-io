@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
 
@@ -46,11 +46,11 @@ function Login() {
     } catch (error) {
       setLoginErrorMsg(firebaseErrorFormat(error))
     }
-  }
+  };
 
   return ( 
     <C.Container>
-      <Template>
+      <Template onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}>
         <MainCard>
           <>
           <div className='logo'>

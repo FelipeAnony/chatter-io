@@ -13,10 +13,12 @@ function FormInput({inputType, title, inputPlaceholder, error, state, setState }
   return (
     <C.Container error={error}>
       <div className='innerContainer'>
-        <label>
+        <label htmlFor={title}>
           {title}
         </label>
-        <input 
+        <input
+          name={title}
+          required 
           type={inputType} 
           value={state}
           onChange={(e) => setState(e.target.value)}  

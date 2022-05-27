@@ -27,4 +27,14 @@ export const Container = styled.div<Props>`
     margin-bottom: 10px;
   }
 
+  .chatsContainer {
+    width: 100%;
+    height: 70%;
+    overflow-y: auto;
+  
+    @media(min-height: 700px) {
+      height: 83%;
+    }
+  }
+
 `

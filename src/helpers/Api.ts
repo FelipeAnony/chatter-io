@@ -90,3 +90,7 @@ export const sendMessage = async (docId: string, data: any) => {
     messages: arrayUnion(data)
   });
 };
+
+export const createNewChat = () => {
+  
+};

@@ -7,6 +7,10 @@ export type UserDataType = {
   email: string;
   chats: {
     chatId: string;
+    users: {
+      user1: string; 
+      user2: string
+    }
   }[];
   userAvatar: string;
 };

@@ -3,10 +3,12 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
+  max-height: 100vh;
   display: flex; 
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  overflow: hidden;
 
   .logo {
     width: 100px;
@@ -24,7 +26,7 @@ export const Container = styled.div`
   }
 
   hr {
-    margin-top: 30px;
+    margin-top: 20px;
     height: 1px;
     width: 90%;
   }
@@ -32,7 +34,7 @@ export const Container = styled.div`
   .googleLoginBtn {
     width: 80%;
     padding: 5px 10px;
-    margin-top: 10px;
+    margin-top: 15px;
     color: white;
     border: solid thin grey;
     border-radius: 5px;
@@ -65,8 +67,14 @@ export const Container = styled.div`
     padding: 1px;
   }
 
+  .forgotPass {
+    font-size: 13px;
+    text-decoration: none;
+  }
+
   .linkToSignUp{
     margin: 10px 0;
+    font-size: 13px;
   }
 
 `

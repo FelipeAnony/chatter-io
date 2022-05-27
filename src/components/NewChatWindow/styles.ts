@@ -7,6 +7,7 @@ type Props = {
 
 export const Container = styled.div<Props>`
   display: ${props => props.visibility ? 'flex' : 'none'};
+  flex-direction: column;
   position: absolute;
   top: 10px;
   width: calc(100% - 20px);
@@ -31,5 +32,13 @@ export const Container = styled.div<Props>`
         background-color: #cccccc40;
       }
     }
+  };
+
+  .innerContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 100%;
+    overflow-y: auto;
   };
 `
