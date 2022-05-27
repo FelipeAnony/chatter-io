@@ -7,6 +7,7 @@ type Props = {
 
 export const Container = styled.div<Props>`
   display: ${props => props.isVisible ? 'block': 'none'};
+  position: relative;
   background-color: ${props => props.userTheme === 'dark' ? '#222' : '#fff'};
   border-radius: 5px;
   padding: 10px;

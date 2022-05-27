@@ -4,6 +4,9 @@ import ChatCard from '../ChatCard';
 import SearchBox from '../SearchBox';
 
 import useMainContext from '../../hooks/useMainContext';
+import NewChatButton from '../NewChatButton';
+import { useState } from 'react';
+import NewChatWindow from '../NewChatWindow';
 
 type Props = {
   screenWidth: number;
@@ -13,6 +16,7 @@ type Props = {
 
 function AllChats({ screenWidth, visibility, setVisibility }: Props) {
   const { theme, userData } = useMainContext();
+  const [newChatWindowVisibility, setNewChatWindowVisibility] = useState(false);
 
   return ( 
     <C.Container 
@@ -30,6 +34,14 @@ function AllChats({ screenWidth, visibility, setVisibility }: Props) {
           />
         ))
       }
+      <NewChatButton 
+        setVisibility={setNewChatWindowVisibility}
+      />
+      <NewChatWindow 
+        visibility={newChatWindowVisibility}
+        setVisibility={setNewChatWindowVisibility}
+      />
+
     </C.Container> 
   ); 
 }
