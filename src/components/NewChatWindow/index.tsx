@@ -76,7 +76,7 @@ function NewChatWindow ({visibility, setVisibility}: Props) {
           usersList.map((e, key)=>(
             <NewChatCard 
               key={key}
-              userData={e.data}
+              user={e.data}
             />
           ))
         }

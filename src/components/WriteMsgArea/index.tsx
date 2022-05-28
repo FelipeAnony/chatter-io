@@ -13,7 +13,7 @@ type Props = {
 
 function WriteMsgArea({emojiIsOpen, inputMsg,  setEmojiIsOpen, setInputMsg, handlerClick}: Props) {
   return ( 
-    <C.Container>
+    <C.Container onKeyUp={(e) => e.key === 'Enter' && handlerClick()}>
         <div 
           className='emojiButton'
           onClick={() => setEmojiIsOpen(!emojiIsOpen)}

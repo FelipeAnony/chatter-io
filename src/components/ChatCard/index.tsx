@@ -14,7 +14,7 @@ type Props = {
 };
 
 function ChatCard({ chatId, setVisibility }: Props) {
-  const { theme, setCurrentChat } = useMainContext();
+  const { userData,theme, setCurrentChat } = useMainContext();
   const [chatData, setchatData] = useState<any>(null);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function ChatCard({ chatId, setVisibility }: Props) {
     return () => {
       unsub();
     }
-  }, []);
+  }, [chatId]);
 
   const handleClick = () => {
     setVisibility(false);
@@ -41,16 +41,16 @@ function ChatCard({ chatId, setVisibility }: Props) {
     >
       {chatData && 
         <>
-          <ProfilePhoto imageSrc={chatData.chatAvatar}/>
+          <ProfilePhoto imageSrc={(chatData.chatAvatars.user1.email === userData?.email) ? chatData.chatAvatars.user2.photo : chatData.chatAvatars.user1.photo}/>
           <div className='userInfo'>
-            <div className='userInfo__name'>{chatData.title}</div>
+            <div className='userInfo__name'>{(chatData.users.user1 === userData?.name) ? chatData.users.user2 : chatData.users.user1}</div>
             <div className='userInfo__lastMessage'>{chatData.lastMessage}</div>
             <div className='userInfo__date'>{formatDateByTimestamp(chatData.lastMessageDate)}</div>
           </div> 
         </>
-      }
+      } 
     </C.Container>
-   );
+  );
 }
 
 export default ChatCard;

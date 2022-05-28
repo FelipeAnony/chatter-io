@@ -8,7 +8,7 @@ import {
   setDoc,
   updateDoc,
   arrayUnion,
-  serverTimestamp,
+  addDoc
 } from "firebase/firestore";
 
 import {
@@ -22,6 +22,7 @@ import {
 } from "firebase/auth";
 
 import firebaseConfig from './firebaseConfig';
+import { UserDataType } from '../types/mainTypes';
 
 const firebaseApp = initializeApp(firebaseConfig);
 export const db = getFirestore(firebaseApp);
@@ -86,11 +87,41 @@ export const sendMessage = async (docId: string, data: any) => {
 
   await updateDoc(docRef, {
     lastMessage: data.body,
-    lastMessageDate: serverTimestamp(),
+    lastMessageDate: Date.now(),
     messages: arrayUnion(data)
   });
 };
 
-export const createNewChat = () => {
-  
+export const createNewChat = async (user1: UserDataType, user2: any) => {
+  const docRef = await addDoc(collection(db, "chats"), {
+    chatAvatars: {
+      user1: {
+        email: user1.email,
+        photo: user1.userAvatar
+      },
+      user2: {
+        email: user2.email,
+        photo: user2.profileImage
+      }
+    },
+    lastMessage: '',
+    lastMessageDate: 0,
+    messages: [],
+    users: {
+      user1: user1.name,
+      user2: user2.name
+    }
+  });
+
+  const user1Ref = doc(db, 'users', `${user1.email}`);
+  await updateDoc(user1Ref, {
+    chats: arrayUnion({chatId: docRef.id, users: {user1: user1.email, user2: user2.email}})
+  });
+
+  const user2Ref = doc(db, 'users', `${user2.email}`);
+  await updateDoc(user2Ref, {
+    chats: arrayUnion({chatId: docRef.id, users: {user1: user1.email, user2: user2.email}})
+  });
+
+  return docRef.id;
 };

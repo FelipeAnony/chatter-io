@@ -12,7 +12,7 @@ import ProfilePhoto from '../ProfilePhoto';
 import useMainContext from '../../hooks/useMainContext';
 import { db, sendMessage } from '../../helpers/Api';
 import { ChatDataType } from '../../types/mainTypes';
-import { collection,  onSnapshot } from 'firebase/firestore';
+import { collection,  doc,  onSnapshot, query, where } from 'firebase/firestore';
 
 type Props = {
   screenWidth: number;
@@ -35,22 +35,19 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const unsub = onSnapshot(collection(db, `chats`, `${currentChat}`), (doc) => {
-      let data: any = [];
 
-      doc.forEach((doc) => {
-        data.push(doc.data());
-      });
-      setCurrentChatData(data);
+    if(!currentChat) return;
+
+    const unsub = onSnapshot(doc(db, `chats`, `${currentChat}`), (doc) => {
+      setCurrentChatData(doc.data());
 
     }); 
      
     return () => {
-      setCurrentChatData(null)
       unsub();
     }
 
-  }, []);
+  }, [currentChat]);
 
   useEffect(() => {
     if(divRef.current) {
@@ -68,7 +65,7 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
     const message = {
       author: userAuth.email,
       body: inputMsg,
-      date:+ new Date() / 1000,
+      date:+ new Date(),
     };
 
     currentChat && await sendMessage(currentChat, message);
@@ -87,6 +84,8 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
       emojiIsVisible={emojiIsOpen} // controls emoji picker visibility
     >
       
+      {!currentChat ? 'loading' : 
+      <>
       <div className='chatInfo'>
         <div 
           className='chatInfo__backButton'
@@ -95,19 +94,19 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
           <BiLeftArrowAlt />
         </div>
         <ProfilePhoto 
-          imageSrc={currentChatData ? currentChatData[0].chatAvatar : ''}
+          imageSrc={currentChatData ? currentChatData.chatAvatar : ''}
           size='small'
         />
         <div className='chatInfo__chatTitle'>
-          {currentChatData ? currentChatData[0].title : 'Loading...'}
+          {currentChatData ? currentChatData.title : 'Loading...'}
         </div>
       </div>
       <div 
         className='messagesContainer'
         ref={divRef}
       >
-          {currentChatData && currentChatData[0].messages.length > 0 &&
-            currentChatData[0].messages.map((e: any, key:any) => (
+          {currentChatData && currentChatData.messages.length > 0 &&
+            currentChatData.messages.map((e: any, key:any) => (
                 <MessageBallon 
                   message={e.body}
                   key={key}
@@ -130,6 +129,7 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
         setInputMsg={setInputMsg}
         handlerClick={handleSendMessage}
       />
+      </>}
     </C.Container>
    );
 }
