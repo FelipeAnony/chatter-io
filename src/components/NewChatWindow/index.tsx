@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useMainContext from '../../hooks/useMainContext';
 import * as C from './styles';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
@@ -8,7 +8,8 @@ import NewChatCard from '../NewChatCard';
 
 type Props = {
   visibility: boolean;
-  setVisibility: React.Dispatch<SetStateAction<boolean>>;
+  setVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  setAllChatsMenuVisibility: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 type UsersList = {
@@ -27,10 +28,10 @@ type UsersList = {
   id: string;
 }[];
 
-function NewChatWindow ({visibility, setVisibility}: Props) {
+function NewChatWindow ({visibility, setVisibility, setAllChatsMenuVisibility}: Props) {
   
   const [usersList, setUsersList] = useState<UsersList>([]);
-  const { theme, userAuth, userData } = useMainContext();
+  const { theme, userAuth, userData, currentChat } = useMainContext();
 
   useEffect(() => {
     const contatoExiste = (email: string) => {
@@ -48,13 +49,13 @@ function NewChatWindow ({visibility, setVisibility}: Props) {
       const tmpdata: UsersList = await getDataFromDb('users');
 
       const filteredData = tmpdata.filter((e) => e.id !== userAuth.email && contatoExiste(e.id));
-
+      console.log(filteredData)
       setUsersList(filteredData);
     }; 
 
     loadData();
 
-  }, [userAuth.email, userData]);
+  }, [userAuth.email, userData, currentChat]);
 
   return ( 
     <C.Container 
@@ -77,6 +78,8 @@ function NewChatWindow ({visibility, setVisibility}: Props) {
             <NewChatCard 
               key={key}
               user={e.data}
+              setWindowNewChatVisibility={setVisibility}
+              setAllChatsMenuVisibility={setAllChatsMenuVisibility}
             />
           ))
         }

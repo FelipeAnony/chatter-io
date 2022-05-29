@@ -14,7 +14,7 @@ type Props = {
 };
 
 function ChatCard({ chatId, setVisibility }: Props) {
-  const { userData,theme, setCurrentChat } = useMainContext();
+  const { userData, theme, setCurrentChat } = useMainContext();
   const [chatData, setchatData] = useState<any>(null);
 
   useEffect(() => {

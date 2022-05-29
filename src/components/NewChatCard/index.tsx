@@ -10,17 +10,21 @@ type Props = {
     name: string;
     profileImage: string;
   };
+  setWindowNewChatVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  setAllChatsMenuVisibility: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function NewChatCard({ user }: Props) {
-  const { theme, setCurrentChat, userData } = useMainContext();
+function NewChatCard({ user, setAllChatsMenuVisibility, setWindowNewChatVisibility }: Props) {
+  const { theme, setCurrentChat, userData, setUserData } = useMainContext();
 
   const handleClick = () => {
-    //fechar a tela add new chat e setar a visibilidade do messageMenu 
     const newChat = async () => {
       if(userData) {
-        const chatId = await createNewChat(userData, user);
-        setCurrentChat(chatId)
+        const chatObj = await createNewChat(userData, user);
+        setCurrentChat(chatObj.id)
+        setUserData({...userData, chats:[...userData.chats, ...chatObj.chats]})
+        setWindowNewChatVisibility(false);
+        setAllChatsMenuVisibility(false);
       }
     }
 

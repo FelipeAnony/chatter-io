@@ -40,6 +40,7 @@ function AllChats({ screenWidth, visibility, setVisibility }: Props) {
       <NewChatWindow
         visibility={newChatWindowVisibility}
         setVisibility={setNewChatWindowVisibility}
+        setAllChatsMenuVisibility={setVisibility}
       />
     </C.Container>
   ); 

@@ -26,7 +26,7 @@ function Main() {
       const initialUserData = {
         name: tmpUserData || userAuth.displayName || '',
         email: userAuth.email,
-        userAvatar: '',
+        userAvatar: 'none',
         chats: []
       };
 

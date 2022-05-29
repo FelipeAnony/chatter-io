@@ -101,7 +101,7 @@ export const createNewChat = async (user1: UserDataType, user2: any) => {
       },
       user2: {
         email: user2.email,
-        photo: user2.profileImage
+        photo: user2.userAvatar
       }
     },
     lastMessage: '',
@@ -123,5 +123,5 @@ export const createNewChat = async (user1: UserDataType, user2: any) => {
     chats: arrayUnion({chatId: docRef.id, users: {user1: user1.email, user2: user2.email}})
   });
 
-  return docRef.id;
+  return {id: docRef.id, chats: [{chatId: docRef.id, users: {user1: user1.email, user2: user2.email}}]};
 };

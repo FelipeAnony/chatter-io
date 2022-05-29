@@ -12,7 +12,7 @@ import ProfilePhoto from '../ProfilePhoto';
 import useMainContext from '../../hooks/useMainContext';
 import { db, sendMessage } from '../../helpers/Api';
 import { ChatDataType } from '../../types/mainTypes';
-import { collection,  doc,  onSnapshot, query, where } from 'firebase/firestore';
+import { doc,  onSnapshot } from 'firebase/firestore';
 
 type Props = {
   screenWidth: number;
@@ -30,7 +30,7 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
   const [emojiIsOpen, setEmojiIsOpen] = useState(false);
   const [inputMsg, setInputMsg] = useState('');
   const [currentChatData, setCurrentChatData] = useState<ChatDataType | any>(null);
-  const { userAuth, theme, currentChat } = useMainContext();
+  const { userAuth, theme, currentChat, userData } = useMainContext();
 
   const divRef = useRef<HTMLDivElement>(null);
 
@@ -40,7 +40,6 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
 
     const unsub = onSnapshot(doc(db, `chats`, `${currentChat}`), (doc) => {
       setCurrentChatData(doc.data());
-
     }); 
      
     return () => {
@@ -84,7 +83,7 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
       emojiIsVisible={emojiIsOpen} // controls emoji picker visibility
     >
       
-      {!currentChat ? 'loading' : 
+      {!currentChatData ? 'loading' : 
       <>
       <div className='chatInfo'>
         <div 
@@ -94,11 +93,11 @@ function ChatArea({ screenWidth, visibility, setVisibility }:Props) {
           <BiLeftArrowAlt />
         </div>
         <ProfilePhoto 
-          imageSrc={currentChatData ? currentChatData.chatAvatar : ''}
+          imageSrc={currentChatData.chatAvatars.user1 === userAuth.email ? currentChatData.chatAvatars.user2.photo : currentChatData.chatAvatars.user1.photo}
           size='small'
         />
         <div className='chatInfo__chatTitle'>
-          {currentChatData ? currentChatData.title : 'Loading...'}
+          {userData && currentChatData.users.user1 === userData.name ? currentChatData.users.user2 : currentChatData.users.user1}
         </div>
       </div>
       <div 

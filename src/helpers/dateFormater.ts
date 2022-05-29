@@ -1,4 +1,5 @@
 export const formatDateByTimestamp = (timestamp: number) => {
+  if(timestamp === 0) return '';
   const date = new Date(timestamp);
 
   const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate(); 
