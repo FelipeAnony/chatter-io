@@ -22,6 +22,7 @@ import {
 } from "firebase/auth";
 
 import firebaseConfig from './firebaseConfig';
+
 import { UserDataType } from '../types/mainTypes';
 
 const firebaseApp = initializeApp(firebaseConfig);
