@@ -14,19 +14,26 @@ type Props = {
   setAllChatsMenuVisibility: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function NewChatCard({ user, setAllChatsMenuVisibility, setWindowNewChatVisibility }: Props) {
+function NewChatCard({
+  user,
+  setAllChatsMenuVisibility,
+  setWindowNewChatVisibility,
+}: Props) {
   const { theme, setCurrentChat, userData, setUserData } = useMainContext();
 
   const handleClick = () => {
     const newChat = async () => {
-      if(userData) {
+      if (userData) {
         const chatObj = await createNewChat(userData, user);
-        setCurrentChat(chatObj.id)
-        setUserData({...userData, chats:[...userData.chats, ...chatObj.chats]})
+        setCurrentChat(chatObj.id);
+        setUserData({
+          ...userData,
+          chats: [...userData.chats, ...chatObj.chats],
+        });
         setWindowNewChatVisibility(false);
         setAllChatsMenuVisibility(false);
       }
-    }
+    };
 
     newChat();
   };

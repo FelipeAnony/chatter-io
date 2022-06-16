@@ -5,31 +5,34 @@ type Props = {
   title: string;
   inputPlaceholder?: string;
   state: string;
-  setState: React.Dispatch<React.SetStateAction<string>>; 
+  setState: React.Dispatch<React.SetStateAction<string>>;
   error: string;
 };
 
-function FormInput({inputType, title, inputPlaceholder, error, state, setState }: Props) {
+function FormInput({
+  inputType,
+  title,
+  inputPlaceholder,
+  error,
+  state,
+  setState,
+}: Props) {
   return (
     <C.Container error={error}>
-      <div className='innerContainer'>
-        <label htmlFor={title}>
-          {title}
-        </label>
+      <div className="innerContainer">
+        <label htmlFor={title}>{title}</label>
         <input
           name={title}
-          required 
-          type={inputType} 
+          id={title}
+          required
+          type={inputType}
           value={state}
-          onChange={(e) => setState(e.target.value)}  
-          placeholder={inputPlaceholder ? inputPlaceholder : ''}    
+          onChange={(e) => setState(e.target.value)}
+          placeholder={inputPlaceholder ? inputPlaceholder : ''}
         />
       </div>
-      { error !== '' &&
-        <div className='errorMsg'>{error}</div>
-      }
+      {error !== '' && <div className="errorMsg">{error}</div>}
     </C.Container>
-
   );
 }
 

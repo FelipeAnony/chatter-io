@@ -7,18 +7,16 @@ type Props = {
   size?: string;
 };
 
-function ProfilePhoto({imageSrc, size}:Props) {
-  return ( 
+function ProfilePhoto({ imageSrc, size }: Props) {
+  return (
     <C.Container size={size}>
-      {imageSrc ?
-       <img 
-         src={imageSrc}
-         alt='profile'
-       /> :
-       <IoPersonOutline className='person'/>
-      }
+      {imageSrc && imageSrc.length > 10 ? (
+        <img src={imageSrc} alt="profile" />
+      ) : (
+        <IoPersonOutline className="person" />
+      )}
     </C.Container>
-   );
+  );
 }
 
 export default ProfilePhoto;

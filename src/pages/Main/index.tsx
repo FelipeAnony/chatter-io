@@ -21,22 +21,23 @@ function Main() {
   }, []);
 
   useEffect(() => {
-
     const getUserData = async () => {
       const initialUserData = {
         name: tmpUserData || userAuth.displayName || '',
         email: userAuth.email,
-        userAvatar: 'none',
-        chats: []
+        userAvatar: '',
+        chats: [],
       };
 
-      const tmpData = await getOrCreateDocumentOnDb('users', userAuth.email, initialUserData)
+      const tmpData = await getOrCreateDocumentOnDb(
+        'users',
+        userAuth.email,
+        initialUserData
+      );
       setUserData(tmpData);
-
     };
 
     getUserData();
-
   }, []);
 
   return (

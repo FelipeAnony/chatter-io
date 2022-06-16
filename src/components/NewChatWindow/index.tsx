@@ -17,9 +17,9 @@ type UsersList = {
     chats: {
       chatId: string;
       users: {
-        user1: string; 
-        user2: string
-      }
+        user1: string;
+        user2: string;
+      };
     }[];
     email: string;
     name: string;
@@ -28,64 +28,66 @@ type UsersList = {
   id: string;
 }[];
 
-function NewChatWindow ({visibility, setVisibility, setAllChatsMenuVisibility}: Props) {
-  
+function NewChatWindow({
+  visibility,
+  setVisibility,
+  setAllChatsMenuVisibility,
+}: Props) {
   const [usersList, setUsersList] = useState<UsersList>([]);
   const { theme, userAuth, userData, currentChat } = useMainContext();
 
   useEffect(() => {
     const contatoExiste = (email: string) => {
-      if(userData){
-        const tmpArray = userData.chats.filter((e) => (
-          e.users.user2 === email
-        ))
-      
-        if(tmpArray.length > 0) return false;
+      if (userData) {
+        const tmpArray = userData.chats.filter((e) => e.users.user2 === email);
+
+        if (tmpArray.length > 0) return false;
         else return true;
-      } 
-    }; 
+      }
+    };
 
     const loadData = async () => {
       const tmpdata: UsersList = await getDataFromDb('users');
 
-      const filteredData = tmpdata.filter((e) => e.id !== userAuth.email && contatoExiste(e.id));
-      console.log(filteredData)
+      const filteredData = tmpdata.filter(
+        (e) => e.id !== userAuth.email && contatoExiste(e.id)
+      );
       setUsersList(filteredData);
-    }; 
+    };
 
     loadData();
-
   }, [userAuth.email, userData, currentChat]);
 
-  return ( 
-    <C.Container 
-      visibility={visibility}
-      userTheme={theme}
-    >
-      <div className='backButtonContainer'>
-        <div 
-          className='backButton'
-          onClick={() => setVisibility(false)}
-        >
+  return (
+    <C.Container visibility={visibility} userTheme={theme}>
+      <div className="backButtonContainer">
+        <div className="backButton" onClick={() => setVisibility(false)}>
           <AiOutlineArrowLeft />
         </div>
       </div>
-      <h1 className='title'>New Chat</h1>
-      <div className='innerContainer'>
-        <SearchBox />
+      <h1 className="title">New Chat</h1>
+      <SearchBox />
+      <div className="innerContainer">
         {usersList.length > 0 &&
-          usersList.map((e, key)=>(
-            <NewChatCard 
-              key={key}
-              user={e.data}
-              setWindowNewChatVisibility={setVisibility}
-              setAllChatsMenuVisibility={setAllChatsMenuVisibility}
-            />
-          ))
-        }
+          usersList.map((e, key) => (
+            <>
+              <NewChatCard
+                key={key}
+                user={e.data}
+                setWindowNewChatVisibility={setVisibility}
+                setAllChatsMenuVisibility={setAllChatsMenuVisibility}
+              />
+              <NewChatCard
+                key={key}
+                user={e.data}
+                setWindowNewChatVisibility={setVisibility}
+                setAllChatsMenuVisibility={setAllChatsMenuVisibility}
+              />
+            </>
+          ))}
       </div>
     </C.Container>
-   );
+  );
 }
 
 export default NewChatWindow;

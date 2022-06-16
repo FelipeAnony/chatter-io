@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 type Props = {
   userTheme: string;
@@ -6,17 +6,20 @@ type Props = {
 };
 
 export const Container = styled.div<Props>`
-  display: ${props => props.visibility ? 'flex' : 'none'};
+  display: ${(props) => (props.visibility ? 'flex' : 'none')};
   flex-direction: column;
-  position: absolute;
-  top: 10px;
-  width: calc(100% - 20px);
-  height: calc(100% - 15px);
-  background-color: ${props => props.userTheme === 'dark' ? '#222' : '#fff'};
+  width: calc(100%);
+  height: calc(100%);
+  background-color: ${(props) =>
+    props.userTheme === 'dark' ? '#222' : '#fff'};
   border-radius: 5px;
 
+  h1 {
+    margin: 5px 0;
+  }
+
   .backButtonContainer {
-    color: ${props => props.userTheme === 'dark' ? 'white' : 'dark'};
+    color: ${(props) => (props.userTheme === 'dark' ? 'white' : 'dark')};
     font-size: 20px;
     padding: 2px;
     cursor: pointer;
@@ -28,17 +31,20 @@ export const Container = styled.div<Props>`
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      &:hover{
+      &:hover {
         background-color: #cccccc40;
       }
     }
-  };
+  }
 
   .innerContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     width: 100%;
-    max-height: 100%;
+    height: 100%;
     overflow-y: auto;
-  };
-`
+    padding: 2px;
+  }
+`;

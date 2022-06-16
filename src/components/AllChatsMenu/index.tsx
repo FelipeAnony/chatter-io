@@ -23,27 +23,32 @@ function AllChats({ screenWidth, visibility, setVisibility }: Props) {
       userTheme={theme}
       isVisible={screenWidth < 830 ? visibility : true}
     >
-      <h1 className="title">Chats</h1>
-      <SearchBox />
-      <div className="chatsContainer">
-        {userData &&
-          userData.chats.length > 0 &&
-          userData.chats.map((e, key) => (
-            <ChatCard
-              key={key}
-              chatId={e.chatId}
-              setVisibility={setVisibility}
-            />
-          ))}
-      </div>
-      <NewChatButton setVisibility={setNewChatWindowVisibility} />
-      <NewChatWindow
-        visibility={newChatWindowVisibility}
-        setVisibility={setNewChatWindowVisibility}
-        setAllChatsMenuVisibility={setVisibility}
-      />
+      {!newChatWindowVisibility ? (
+        <>
+          <h1 className="title">Chats</h1>
+          <SearchBox />
+          <div className="chatsContainer">
+            {userData &&
+              userData.chats.length > 0 &&
+              userData.chats.map((e, key) => (
+                <ChatCard
+                  key={key}
+                  chatId={e.chatId}
+                  setVisibility={setVisibility}
+                />
+              ))}
+          </div>
+          <NewChatButton setVisibility={setNewChatWindowVisibility} />
+        </>
+      ) : (
+        <NewChatWindow
+          visibility={newChatWindowVisibility}
+          setVisibility={setNewChatWindowVisibility}
+          setAllChatsMenuVisibility={setVisibility}
+        />
+      )}
     </C.Container>
-  ); 
+  );
 }
 
 export default AllChats;

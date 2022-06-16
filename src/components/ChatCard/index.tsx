@@ -19,14 +19,12 @@ function ChatCard({ chatId, setVisibility }: Props) {
 
   useEffect(() => {
     const unsub = onSnapshot(doc(db, `chats`, `${chatId}`), (doc) => {
-     
       setchatData(doc.data());
-
-    }); 
+    });
 
     return () => {
       unsub();
-    }
+    };
   }, [chatId]);
 
   const handleClick = () => {
@@ -34,21 +32,30 @@ function ChatCard({ chatId, setVisibility }: Props) {
     setCurrentChat(chatId);
   };
 
-  return ( 
-    <C.Container 
-      userTheme={theme}
-      onClick={handleClick}
-    >
-      {chatData && 
+  return (
+    <C.Container userTheme={theme} onClick={handleClick}>
+      {chatData && (
         <>
-          <ProfilePhoto imageSrc={(chatData.chatAvatars.user1.email === userData?.email) ? chatData.chatAvatars.user2.photo : chatData.chatAvatars.user1.photo}/>
-          <div className='userInfo'>
-            <div className='userInfo__name'>{(chatData.users.user1 === userData?.name) ? chatData.users.user2 : chatData.users.user1}</div>
-            <div className='userInfo__lastMessage'>{chatData.lastMessage}</div>
-            <div className='userInfo__date'>{formatDateByTimestamp(chatData.lastMessageDate)}</div>
-          </div> 
+          <ProfilePhoto
+            imageSrc={
+              (chatData.chatAvatars.user1.email === userData?.email
+                ? chatData.chatAvatars.user2.photo
+                : chatData.chatAvatars.user1.photo) || ''
+            }
+          />
+          <div className="userInfo">
+            <div className="userInfo__name">
+              {chatData.users.user1 === userData?.name
+                ? chatData.users.user2
+                : chatData.users.user1}
+            </div>
+            <div className="userInfo__lastMessage">{chatData.lastMessage}</div>
+            <div className="userInfo__date">
+              {formatDateByTimestamp(chatData.lastMessageDate)}
+            </div>
+          </div>
         </>
-      } 
+      )}
     </C.Container>
   );
 }

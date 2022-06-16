@@ -6,6 +6,7 @@
 .pnp.js
 taskstodo.txt
 firebaseConfig.ts
+nextFeatures.txt
 
 # testing
 /coverage

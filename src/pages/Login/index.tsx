@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 
 import MainCard from '../../components/MainCard';
-import  logo  from '../../images/logo.png'
+import logo from '../../images/logo.png';
 import FormInput from '../../components/FormInput';
 
 import * as C from './styles';
@@ -25,14 +25,12 @@ function Login() {
     const tmpEmailError = validateForm.email(userEmail);
     setEmailError(tmpEmailError || '');
 
-    if(tmpEmailError) {
+    if (tmpEmailError) {
       return;
-
     } else {
       try {
         await login(userEmail, userPassword);
-        navigate('/')
-        
+        navigate('/');
       } catch (error) {
         setLoginErrorMsg(firebaseErrorFormat(error));
       }
@@ -41,68 +39,61 @@ function Login() {
 
   const handleGoogleLogin = async () => {
     try {
-      await loginWithGoogle()
-      navigate('/') 
+      await loginWithGoogle();
+      navigate('/');
     } catch (error) {
-      setLoginErrorMsg(firebaseErrorFormat(error))
+      setLoginErrorMsg(firebaseErrorFormat(error));
     }
   };
 
-  return ( 
+  return (
     <C.Container>
       <Template onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}>
         <MainCard>
           <>
-          <div className='logo'>
-            <img src={logo} alt='chatter.io' />
-          </div>
-          <h3>Login</h3>
-          {loginErrorMsg && <ErrorMessage>{loginErrorMsg}</ErrorMessage>}
-          <FormInput 
-            inputType='email'
-            title='Email'
-            inputPlaceholder='example@example.com'
-            error={emailError}
-            state={userEmail}
-            setState={setUserEmail}
-          />
-          <FormInput 
-            inputType='password'
-            title='Password'
-            error=''
-            state={userPassword}
-            setState={setUserPassword}
-          />
-          <MainButton 
-            onClickFn={handleSubmit}
-            title='Login'
-            color='#6800B9'
-            size='80%'
-          />
-          <hr/>
-          <div
-            className='googleLoginBtn' 
-            onClick={handleGoogleLogin}
-          >
-            <FcGoogle className='googleLogo'/>
-            Login With Google 
-          </div>
-          <a
-            href='/forgotpassword' 
-            target='_blank' 
-            className='forgotPass'
-          >
-            Forgot your password?
-          </a> 
+            <div className="logo">
+              <img src={logo} alt="chatter.io" />
+            </div>
+            <h3>Login</h3>
+            {loginErrorMsg && <ErrorMessage>{loginErrorMsg}</ErrorMessage>}
+            <FormInput
+              inputType="email"
+              title="Email"
+              inputPlaceholder="example@example.com"
+              error={emailError}
+              state={userEmail}
+              setState={setUserEmail}
+            />
+            <FormInput
+              inputType="password"
+              title="Password"
+              error=""
+              state={userPassword}
+              setState={setUserPassword}
+            />
+            <MainButton
+              onClickFn={handleSubmit}
+              title="Login"
+              color="#6800B9"
+              size="80%"
+            />
+            <hr />
+            <div className="googleLoginBtn" onClick={handleGoogleLogin}>
+              <FcGoogle className="googleLogo" />
+              Login With Google
+            </div>
+            <a href="/forgotpassword" target="_blank" className="forgotPass">
+              Forgot your password?
+            </a>
           </>
         </MainCard>
-        <div className='linkToSignUp'>
-            Doesn't have an account yet? 
-            <Link to='/signup'> Sign up now!</Link>
-        </div> 
+        <div className="linkToSignUp">
+          Doesn't have an account yet?
+          <Link to="/signup"> Sign up now!</Link>
+        </div>
       </Template>
     </C.Container>
-   );
+  );
 }
 
 export default Login;
