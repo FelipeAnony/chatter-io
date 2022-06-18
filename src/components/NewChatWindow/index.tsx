@@ -70,20 +70,12 @@ function NewChatWindow({
       <div className="innerContainer">
         {usersList.length > 0 &&
           usersList.map((e, key) => (
-            <>
-              <NewChatCard
-                key={key}
-                user={e.data}
-                setWindowNewChatVisibility={setVisibility}
-                setAllChatsMenuVisibility={setAllChatsMenuVisibility}
-              />
-              <NewChatCard
-                key={key}
-                user={e.data}
-                setWindowNewChatVisibility={setVisibility}
-                setAllChatsMenuVisibility={setAllChatsMenuVisibility}
-              />
-            </>
+            <NewChatCard
+              key={key}
+              user={e.data}
+              setWindowNewChatVisibility={setVisibility}
+              setAllChatsMenuVisibility={setAllChatsMenuVisibility}
+            />
           ))}
       </div>
     </C.Container>
