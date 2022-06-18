@@ -7,8 +7,8 @@ import { getDataFromDb } from '../../helpers/Api';
 import NewChatCard from '../NewChatCard';
 
 type Props = {
-  visibility: boolean;
-  setVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  newChatWindowVisibility: boolean;
+  setNewChatWindowVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   setAllChatsMenuVisibility: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -29,8 +29,8 @@ type UsersList = {
 }[];
 
 function NewChatWindow({
-  visibility,
-  setVisibility,
+  newChatWindowVisibility,
+  setNewChatWindowVisibility,
   setAllChatsMenuVisibility,
 }: Props) {
   const [usersList, setUsersList] = useState<UsersList>([]);
@@ -59,9 +59,12 @@ function NewChatWindow({
   }, [userAuth.email, userData, currentChat]);
 
   return (
-    <C.Container visibility={visibility} userTheme={theme}>
+    <C.Container visibility={newChatWindowVisibility} userTheme={theme}>
       <div className="backButtonContainer">
-        <div className="backButton" onClick={() => setVisibility(false)}>
+        <div
+          className="backButton"
+          onClick={() => setNewChatWindowVisibility(false)}
+        >
           <AiOutlineArrowLeft />
         </div>
       </div>
@@ -73,7 +76,7 @@ function NewChatWindow({
             <NewChatCard
               key={key}
               user={e.data}
-              setWindowNewChatVisibility={setVisibility}
+              setNewChatWindowVisibility={setNewChatWindowVisibility}
               setAllChatsMenuVisibility={setAllChatsMenuVisibility}
             />
           ))}

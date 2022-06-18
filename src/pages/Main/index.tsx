@@ -16,8 +16,24 @@ function Main() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const { theme, userAuth, tmpUserData, setUserData } = useMainContext();
 
+  console.log('Main page renderizado');
+
   useEffect(() => {
-    window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
+    //debounce function to prevent unnecessary render and improve performance
+
+    let timer: any;
+
+    const resizeScreen = () => {
+      clearInterval(timer);
+
+      timer = setTimeout(() => {
+        setScreenWidth(window.innerWidth);
+      }, 300);
+    };
+
+    window.addEventListener('resize', resizeScreen);
+
+    return () => window.removeEventListener('resize', resizeScreen);
   }, []);
 
   useEffect(() => {

@@ -10,14 +10,14 @@ type Props = {
     name: string;
     profileImage: string;
   };
-  setWindowNewChatVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  setNewChatWindowVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   setAllChatsMenuVisibility: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function NewChatCard({
   user,
   setAllChatsMenuVisibility,
-  setWindowNewChatVisibility,
+  setNewChatWindowVisibility,
 }: Props) {
   const { theme, setCurrentChat, userData, setUserData } = useMainContext();
 
@@ -30,7 +30,7 @@ function NewChatCard({
           ...userData,
           chats: [...userData.chats, ...chatObj.chats],
         });
-        setWindowNewChatVisibility(false);
+        setNewChatWindowVisibility(false);
         setAllChatsMenuVisibility(false);
       }
     };

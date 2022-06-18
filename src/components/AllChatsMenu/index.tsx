@@ -21,6 +21,9 @@ function AllChats({ screenWidth, visibility, setVisibility }: Props) {
   return (
     <C.Container
       userTheme={theme}
+      //if screenWidth are less than 830, then the mobile view are showed
+      //in mobile view AllChatsMenu and ChatAreaMenu never both stay rendered
+      //if screenWidth are more than 830, then the desktop view are showed and it always show the both mentioned components
       isVisible={screenWidth < 830 ? visibility : true}
     >
       {!newChatWindowVisibility ? (
@@ -30,20 +33,22 @@ function AllChats({ screenWidth, visibility, setVisibility }: Props) {
           <div className="chatsContainer">
             {userData &&
               userData.chats.length > 0 &&
-              userData.chats.map((e, key) => (
+              userData.chats.map((e) => (
                 <ChatCard
-                  key={key}
+                  key={e.chatId}
                   chatId={e.chatId}
                   setVisibility={setVisibility}
                 />
               ))}
           </div>
-          <NewChatButton setVisibility={setNewChatWindowVisibility} />
+          <NewChatButton
+            setNewChatWindowVisibility={setNewChatWindowVisibility}
+          />
         </>
       ) : (
         <NewChatWindow
-          visibility={newChatWindowVisibility}
-          setVisibility={setNewChatWindowVisibility}
+          newChatWindowVisibility={newChatWindowVisibility}
+          setNewChatWindowVisibility={setNewChatWindowVisibility}
           setAllChatsMenuVisibility={setVisibility}
         />
       )}
